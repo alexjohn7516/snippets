@@ -1,0 +1,7 @@
+{
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "python.formatting.provider": "black",
+  "python.linting.pylintArgs": ["--disable=C0114", "--django-settings-moduel=mysite.settings"]
+}

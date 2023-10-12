@@ -1,0 +1,6 @@
+CREATE USER tuto;
+CREATE DATABASE django_tutorial;
+GRANT ALL PRIVILEGES ON DATABASE django_tutorial TO tuto;
+
+CREATE DATABASE django_test;
+GRANT ALL PRIVILEGES ON DATABASE django_test TO tuto;
