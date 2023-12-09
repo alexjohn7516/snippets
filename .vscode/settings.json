@@ -3,5 +3,20 @@
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "python.formatting.provider": "black",
-  "python.linting.pylintArgs": ["--disable=C0114", "--django-settings-moduel=mysite.settings"]
+  "python.linting.pylintArgs": [
+    "--disable=C0114",
+    "--django-settings-moduel=mysite.settings"
+  ],
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "askForPassword": true,
+      "driver": "PostgreSQL",
+      "name": "posgres_tuto",
+      "database": "tutos",
+      "username": "tuto"
+    }
+  ]
 }
