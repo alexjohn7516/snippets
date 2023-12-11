@@ -1,3 +1,4 @@
+name: django-tutorial
 services:
   postgres:
     build:
@@ -14,6 +15,16 @@ services:
       - tutos:/data/postgres-tuto
     ports:
       - "5432:5432"
+    restart: unless-stopped
+  django-api:
+    build:
+      context: .
+      dockerfile: Docker/django.dockerfile
+    container_name: ${API_CONTAINER_NAME}
+    ports:
+      - "8000:8000"
+    env_file:
+      .env
     restart: unless-stopped
 volumes:
   tutos:
