@@ -1,31 +1,48 @@
-name: django-tutorial
+name: django_rest
 services:
-  postgres:
+  db:
     build:
       context: .
       dockerfile: Docker/postgres.dockerfile
-    image: "postgres-tutorial"
-    container_name: ${PG_CONTAINER_NAME}
+    container_name: postgres
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       PGDATA: ${PGDATA}
+      HOST: ${HOST}
+    healthcheck:
+      test: ["CMD", "psql", "-f", "http://localhost"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+      start_interval: 5s
     volumes:
       - tutos:/data/postgres-tuto
     ports:
       - "5432:5432"
+    expose:
+      - "5432"
     restart: unless-stopped
-  django-api:
+
+
+  api:
     build:
-      context: .
-      dockerfile: Docker/django.dockerfile
-    container_name: ${API_CONTAINER_NAME}
+      context: ./src
+      dockerfile: django.dockerfile
+    container_name: django
+    depends_on:
+      - db
+    #     condition: service_healthy
+    # volumes:
+    #   - .:/src
     ports:
       - "8000:8000"
     env_file:
       .env
     restart: unless-stopped
+
 volumes:
   tutos:
     external: true

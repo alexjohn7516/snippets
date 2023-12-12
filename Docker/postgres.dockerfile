@@ -7,3 +7,4 @@ LABEL version="1.0"
 # can these be the migations??? how would I create a replica of a large database and fill it with data?
 COPY *.sql /docker-entrypoint-initdb.d/
 
+EXPOSE 5432
